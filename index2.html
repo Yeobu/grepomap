@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Carte – fr175 (mers 22 → 77)</title>
+<style>
+body{margin:0;background:#111;color:#ccc;font-family:sans-serif;display:flex;flex-direction:column;align-items:center}
+#topbar{margin-top:12px;display:flex;gap:24px;flex-wrap:wrap}
+.bar{display:flex;align-items:center;gap:6px}
+select,button{padding:4px;font-size:14px}
+input[type=color]{border:none;width:22px;height:22px;padding:0}
+canvas{margin-top:12px;border:2px solid #444}
+#legend{position:fixed;top:10px;left:10px;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.row{display:flex;align-items:center;gap:4px}
+.row input[type=checkbox]{margin:0}
+</style>
+</head>
+<body>
+
+<!-- barre de contrôle -->
+<div id="topbar">
+  <div class="bar">
+    Joueur : <select id="playerSel"></select>
+    <button id="addPlayer">＋</button>
+  </div>
+  <div class="bar">
+    Alliance : <select id="allySel"></select>
+    <button id="addAlly">＋</button>
+  </div>
+</div>
+
+<!-- légende dynamique -->
+<div id="legend"></div>
+
+<!-- carte -->
+<canvas id="map" width="800" height="800"></canvas>
+
+<script src="mapData.js"></script>
+<script>
+/* ───────── cadrage 6×6 mers (22-77) ───────── */
+const VIEW=6,CELL=100,SIZE=800,SCALE=SIZE/(VIEW*CELL);
+const BX=2,BY=2,X_MIN=BX*CELL,Y_MIN=BY*CELL,X_MAX=X_MIN+VIEW*CELL,Y_MAX=Y_MIN+VIEW*CELL;
+
+/* palette et états */
+const palette=['#00ffff','#ff7f00','#00ff00','#ff00ff','#ffff00','#00bfff','#ff1493','#7fff00','#ff4500','#20b2aa'];
+let palIdx=0;
+const visA={},colA={},visP={},colP={};
+
+/* DOM refs */
+const canvas=document.getElementById('map'),ctx=canvas.getContext('2d');
+const playerSel=document.getElementById('playerSel'),addPlayer=document.getElementById('addPlayer');
+const allySel=document.getElementById('allySel'),addAlly=document.getElementById('addAlly');
+const legend=document.getElementById('legend');
+
+/* listes déroulantes triées */
+mapData.players.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr'))
+  .forEach(p=>playerSel.add(new Option(p.name,p.id)));
+mapData.alliances.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr'))
+  .forEach(a=>allySel.add(new Option(a.name,a.id)));
+
+/* légende */
+function addRow(id,label,color,visMap,colMap){
+  if(visMap[id])return;
+  visMap[id]=true; colMap[id]=color;
+  const row=document.createElement('div');row.className='row';row.dataset.aid=id;
+  const cb=document.createElement('input');cb.type='checkbox';cb.checked=true;
+  cb.onchange=()=>{visMap[id]=cb.checked;draw();};
+  const cp=document.createElement('input');cp.type='color';cp.value=color;
+  cp.oninput=()=>{colMap[id]=cp.value;draw();};
+  row.append(cb,cp,document.createTextNode(label));
+  legend.append(row);
+}
+function removeRow(id,visMap){
+  const row=legend.querySelector(`div[data-aid="${id}"]`);
+  if(row) legend.removeChild(row);
+  delete visMap[id];
+}
+
+/* ajouts manuels */
+addPlayer.onclick=()=>{
+  const p=mapData.players.find(x=>x.id==playerSel.value);
+  if(p)addRow(p.id,p.name,palette[palIdx++%palette.length],visP,colP),draw();
+};
+addAlly.onclick=()=>{
+  const a=mapData.alliances.find(x=>x.id==allySel.value);
+  if(a)addRow(a.id,a.name,palette[palIdx++%palette.length],visA,colA),draw();
+};
+
+/* offsets slot (20 villes max par île) */
+const OFF=[[0,-6],[4,-4],[6,0],[4,4],[0,6],[-4,4],[-6,0],[-4,-4],
+           [2,-6],[6,-2],[6,2],[2,6],[-2,6],[-6,2],[-6,-2],[-2,-6],
+           [0,-8],[8,0],[0,8],[-8,0]];
+
+/* helpers */
+const toPx=(c,o)=>(c-o)*SCALE;
+function dot(t,r){
+  const d=OFF[t.slot%20]||[0,0];
+  ctx.beginPath();
+  ctx.arc(toPx(t.x+d[0],X_MIN),toPx(t.y+d[1],Y_MIN),r,0,Math.PI*2);
+  ctx.fill();
+}
+
+/* fond mer */
+const water=new Image();
+water.src='assets/water_base.png';
+water.onload=draw;water.onerror=draw;
+
+/* rendu principal */
+function draw(){
+  ctx.fillStyle=water.complete&&water.naturalWidth?ctx.createPattern(water,'repeat'):'#0a4c82';
+  ctx.fillRect(0,0,SIZE,SIZE);
+
+  /* quadrillage */
+  ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1;
+  for(let i=1;i<VIEW;i++){
+    const p=i*CELL*SCALE;
+    ctx.beginPath();ctx.moveTo(p,0);ctx.lineTo(p,SIZE);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(0,p);ctx.lineTo(SIZE,p);ctx.stroke();
+  }
+
+  /* numéros mer */
+  ctx.fillStyle='rgba(255,255,255,0.25)';ctx.font='14px sans-serif';
+  ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let r=0;r<VIEW;r++)for(let c=0;c<VIEW;c++)
+    ctx.fillText(`${BX+c}${BY+r}`,(c*CELL+50)*SCALE,(r*CELL+50)*SCALE);
+
+  /* alliances */
+  mapData.alliances.forEach(a=>{
+    if(!visA[a.id])return;
+    ctx.fillStyle=colA[a.id];
+    a.towns.forEach(t=>{
+      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,1.8);
+    });
+  });
+
+  /* joueurs */
+  mapData.players.forEach(p=>{
+    if(!visP[p.id])return;
+    ctx.fillStyle=colP[p.id];
+    p.towns.forEach(t=>{
+      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,2.5);
+    });
+  });
+}
+</script>
+</body>
+</html>
