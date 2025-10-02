@@ -158,11 +158,19 @@ const OFF=[[0,0],[1,0],[-1,0],[0,1],[0,-1],
            [2,1],[2,-1],[-2,1],[-2,-1],
            [1,2],[-1,2],[1,-2]];
 const toPx=(c,o)=>(c-o)*SCALE;
-function dot(t,r){
-  const d=OFF[t.slot%20]||[0,0];
+function dot(t, r){
+  const d = OFF[t.slot % 20] || [0, 0];
+  const x = toPx(t.x + d[0], X_MIN);
+  const y = toPx(t.y + d[1], Y_MIN);
+
   ctx.beginPath();
-  ctx.arc(toPx(t.x+d[0],X_MIN),toPx(t.y+d[1],Y_MIN),r,0,Math.PI*2);
+  ctx.arc(x, y, r, 0, Math.PI * 2);
   ctx.fill();
+
+  /* --- contour noir ultra-léger --- */
+  ctx.lineWidth = 0.5;           // 1 px
+  ctx.strokeStyle = '#000';    // noir
+  ctx.stroke();
 }
 
 /* temples */
