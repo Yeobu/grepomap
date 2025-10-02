@@ -82,7 +82,7 @@ const BX=2,BY=2,X_MIN=BX*CELL,Y_MIN=BY*CELL,X_MAX=X_MIN+VIEW*CELL,Y_MAX=Y_MIN+VI
 /* groupes fixes */
 const GROUPS={
   molky :{ids:[186,368],color:'#ff0000'},
-  allies:{ids:[335,19,239],color:'#0099FF'},   // ← alliés en bleu clair
+  allies:{ids:[335,19,239],color:'#00CCFF'},   // ← alliés en bleu clair
   cafe  :{ids:[3,350],   color:'#ff8c00'}
 };
 
@@ -223,14 +223,14 @@ function draw(){
     if(!visA[a.id])return;
     ctx.fillStyle=colA[a.id];
     a.towns.forEach(t=>{
-      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,1.5);
+      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,2);
     });
   });
   mapData.players.forEach(p=>{
     if(!visP[p.id])return;
     ctx.fillStyle=colP[p.id];
     p.towns.forEach(t=>{
-      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,1.95);
+      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,2);
     });
   });
 
