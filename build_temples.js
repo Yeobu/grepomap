@@ -7,65 +7,59 @@ const XLSX = require('xlsx');
 function toJsLiteral(v, indent = 0) {
   const pad = ' '.repeat(indent);
 
-  // Tableau
-  if (Array.isArray(v)) {
-    return '[\n' +
-      v.map(e => pad + '  ' + toJsLiteral(e, indent + 2)).join(',\n') +
-      '\n' + pad + ']';
-  }
+  if (Array.isArray(v))
+    return '[\n' + v.map(e => pad + '  ' + toJsLiteral(e, indent + 2)).join(',\n') +
+           '\n' + pad + ']';
 
-  // Objet
-  if (v && typeof v === 'object') {
+  if (v && typeof v === 'object')
     return '{\n' +
       Object.entries(v).map(([k, val]) => {
         const key = /^[a-zA-Z_$][\w$]*$/.test(k) ? k : JSON.stringify(k);
         return pad + '  ' + key + ': ' + toJsLiteral(val, indent + 2);
       }).join(',\n') +
       '\n' + pad + '}';
-  }
 
-  // Chaîne
-  if (typeof v === 'string') {
+  if (typeof v === 'string')
     return `'${v.replace(/\\/g, '\\\\').replace(/'/g, '\\\'')}'`;
-  }
 
-  // number, boolean, null
-  return String(v);
+  return String(v);          // number, boolean, null...
 }
 /* -------------------------------------------------- */
 
-// IIFE asynchrone
 (async () => {
   /* --- 1) lecture Excel -------------------------------------------------- */
   const wb     = XLSX.readFile('temples.xlsx');
   const sheet  = wb.Sheets['Feuil1'];
-  const rows   = XLSX.utils.sheet_to_json(sheet, {defval:''});  // tableau d’objets
+  const rows   = XLSX.utils.sheet_to_json(sheet, { defval: '' });  // entêtes déjà retirées
 
   /* --- 2) lecture de l’existant ----------------------------------------- */
   let { staticTemples } = require('./temples_static.js');
-  const byId = new Map(staticTemples.map(t => [t.id, t]));      // accès rapide
+
+  // ► Indexation par **nom** plutôt que par id (évite l’écrasement des id=101)
+  const byName = new Map(staticTemples.map(t => [t.name, t]));
 
   /* --- 3) merge / mise à jour ------------------------------------------- */
-  rows.slice(1).forEach(r => {          // on saute la ligne d’entête
-    const id    = +r.ID;
-    const focus = String(r['Focus']).toLowerCase() === 'true';
+  rows.forEach(r => {
+    const id    = +r.ID;                                    // colonne A
+    const name  = r.Nom;                                    // colonne D
+    const focus = String(r.Focus).toLowerCase() === 'true'; // colonne K
 
-    // Si focus → déjà dans la base, on met juste l'id à jour (au cas où)
-    if (focus) {
-      if (byId.has(id)) byId.get(id).id = id;
+    if (focus) {                    // temple déjà « focus » → on met juste l’id à jour
+      const existing = byName.get(name);
+      if (existing) existing.id = id;
       return;
     }
 
-    if (byId.has(id)) return;           // déjà présent → rien à faire
+    if (byName.has(name)) return;   // déjà présent → rien à faire
 
-    // Temple manquant : on l’ajoute
-    byId.set(id, {
+    // Nouveau temple à ajouter
+    byName.set(name, {
       id,
-      x     : +r.X,
-      y     : +r.Y,
-      name  : r.Nom,
-      type  : r.Type.trim(),
-      bonus : r.Effet,
+      x     : +r.X,                 // colonne B
+      y     : +r.Y,                 // colonne C
+      name,
+      type  : r.Type.trim(),        // colonne G
+      bonus : r.Effet,              // colonne F
       size    : 'small',
       owner   : 0,
       contest : 'none',
@@ -73,15 +67,15 @@ function toJsLiteral(v, indent = 0) {
     });
   });
 
-  const result = [...byId.values()].sort((a,b) => a.id - b.id);
+  const result = [...byName.values()]
+                  .sort((a, b) => a.id - b.id);
 
   /* --- 4) écriture du fichier ------------------------------------------- */
   fs.writeFileSync(
     'temples_static.js',
-    '// généré automatiquement par build_temples.js\n'
-    + 'const staticTemples = '
-    + toJsLiteral(result, 0)
-    + ';\n\nmodule.exports = { staticTemples };'
+    '// généré automatiquement par build_temples.js\n' +
+    'const staticTemples = ' + toJsLiteral(result) +
+    ';\n\nmodule.exports = { staticTemples };'
   );
 
   console.log(`✅ temples_static.js mis à jour (${result.length} entrées).`);

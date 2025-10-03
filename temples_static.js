@@ -25,16 +25,16 @@ const staticTemples = [
     focus: false
   },
   {
-    id: 4,
-    x: 486,
-    y: 479,
-    name: 'Thronium',
-    type: 'DEF',
-    bonus: 'Augmente la valeur defensive des Combattants a l\'epee de 15%',
+    id: 5,
+    x: 529,
+    y: 451,
+    name: 'Thèbes',
+    type: 'Portail',
+    bonus: 'Portail M54',
     size: 'small',
     owner: 0,
-    contest: 'none',
-    focus: false
+    contest: 'secured',
+    focus: true
   },
   {
     id: 6,
@@ -59,6 +59,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 8,
+    x: 503,
+    y: 452,
+    name: 'Parthenopolis',
+    type: 'OFF T',
+    bonus: 'Augmente toutes les valeurs offensives des armes Contondant de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 9,
@@ -131,6 +143,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 15,
+    x: 551,
+    y: 433,
+    name: 'Histria',
+    type: 'OFF T',
+    bonus: 'Augmente la valeur offensive de toutes les unités terrestres non mythiques de 6%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 16,
@@ -241,6 +265,42 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 25,
+    x: 402,
+    y: 478,
+    name: 'Sozopolis',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive des Archers de 15%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 26,
+    x: 517,
+    y: 376,
+    name: 'Priene',
+    type: 'PROD NAV',
+    bonus: 'Augmente l\'effet de l\'appel de la mer de 15%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 28,
+    x: 611,
+    y: 576,
+    name: 'Rhêgion',
+    type: 'OFF T',
+    bonus: 'Augmente la valeur offensive des armes Contondant de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 29,
     x: 605,
     y: 433,
@@ -263,6 +323,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 31,
+    x: 372,
+    y: 505,
+    name: 'Panticapaeum',
+    type: 'Portail',
+    bonus: 'Portail M35',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 32,
@@ -289,6 +361,42 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 34,
+    x: 380,
+    y: 462,
+    name: 'Scione',
+    type: 'OFF NAV',
+    bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 35,
+    x: 469,
+    y: 391,
+    name: 'Borysthenes',
+    type: 'Portail',
+    bonus: 'Portail M43',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 36,
+    x: 409,
+    y: 425,
+    name: 'Samos',
+    type: 'OFF T',
+    bonus: 'Augmente toutes les valeurs offensives des armes Contondant de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 37,
     x: 375,
     y: 419,
@@ -311,6 +419,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 39,
+    x: 360,
+    y: 486,
+    name: 'Mulai',
+    type: 'OFF NAV',
+    bonus: 'Améliore la force de vent favorable de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 40,
@@ -385,6 +505,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 46,
+    x: 470,
+    y: 364,
+    name: 'Kallatis',
+    type: 'OFF NAV',
+    bonus: 'Augmente la valeur offensive de toutes les unités navales de 5%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 47,
     x: 578,
     y: 369,
@@ -395,6 +527,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 48,
+    x: 438,
+    y: 373,
+    name: 'Mylasa',
+    type: '3% OFF',
+    bonus: 'Force héroïque augmente l\'attaque de toutes les unités de 3%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
   },
   {
     id: 49,
@@ -431,6 +575,30 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 52,
+    x: 335,
+    y: 499,
+    name: 'Gortyn',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 53,
+    x: 338,
+    y: 459,
+    name: 'Rhodes',
+    type: 'PROD NAV',
+    bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 6%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
   },
   {
     id: 54,
@@ -493,6 +661,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 59,
+    x: 579,
+    y: 640,
+    name: 'Pixous',
+    type: 'REPROD T',
+    bonus: 'Réduit le coût des unités terrestres de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
     id: 60,
     x: 642,
     y: 579,
@@ -505,6 +685,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 61,
+    x: 549,
+    y: 352,
+    name: 'Lekhaion',
+    type: 'PROD NAV',
+    bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 62,
     x: 350,
     y: 569,
@@ -515,6 +707,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 63,
+    x: 567,
+    y: 342,
+    name: 'Pitane',
+    type: 'PROD NAV',
+    bonus: 'Réduit toutes les durées de recrutement d\'unités terrestres de 4.5%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
   },
   {
     id: 64,
@@ -553,6 +757,150 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 67,
+    x: 504,
+    y: 305,
+    name: 'Zakynthos',
+    type: 'OFF T',
+    bonus: 'Augmente toutes les valeurs offensives des armes Contondant de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 68,
+    x: 687,
+    y: 566,
+    name: 'Heraclea',
+    type: 'OFF T',
+    bonus: 'Augmente la valeur offensive de toutes les unités terrestres non mythiques de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'tocomplete',
+    focus: true
+  },
+  {
+    id: 69,
+    x: 321,
+    y: 440,
+    name: 'Élis',
+    type: 'PROD T',
+    bonus: 'Réduit toutes les durées de recrutement d\'unités terrestres de 4.5%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
+    id: 70,
+    x: 644,
+    y: 358,
+    name: 'Smyrna',
+    type: 'OFF T',
+    bonus: 'Augmente la puissance offensive de Cavaliers de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 71,
+    x: 308,
+    y: 468,
+    name: 'Chalcis',
+    type: 'Portail',
+    bonus: 'Portail M34',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 72,
+    x: 363,
+    y: 642,
+    name: 'Cnide',
+    type: 'OFF NAV',
+    bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 73,
+    x: 331,
+    y: 611,
+    name: 'Argos',
+    type: 'OFF T',
+    bonus: 'Augmente la valeur offensive des armes Contondant de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 74,
+    x: 648,
+    y: 625,
+    name: 'Kalamata',
+    type: 'PROD NAV',
+    bonus: 'Réduit le coût des unités navales de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 75,
+    x: 451,
+    y: 676,
+    name: 'Malacca',
+    type: 'Portail',
+    bonus: 'Portail M46',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 76,
+    x: 353,
+    y: 369,
+    name: 'Agde',
+    type: 'NAZE',
+    bonus: 'Augmente les valeurs offensive et defensive de Satyres de 6%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: false
+  },
+  {
+    id: 77,
+    x: 476,
+    y: 690,
+    name: 'Pharos',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 78,
+    x: 533,
+    y: 317,
+    name: 'Tylissos',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 79,
     x: 507,
     y: 694,
@@ -563,6 +911,30 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 80,
+    x: 673,
+    y: 425,
+    name: 'Myos',
+    type: 'Portail',
+    bonus: 'Portail M64',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 81,
+    x: 582,
+    y: 663,
+    name: 'Pyrgos',
+    type: 'Portail',
+    bonus: 'Portail M56',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
   },
   {
     id: 82,
@@ -577,6 +949,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 83,
+    x: 670,
+    y: 599,
+    name: 'Thoricus',
+    type: 'Portail',
+    bonus: 'Portail M65',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 84,
     x: 656,
     y: 380,
@@ -587,6 +971,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 85,
+    x: 701,
+    y: 593,
+    name: 'Kasmenai',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive des archers de 15%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 86,
@@ -613,6 +1009,30 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 88,
+    x: 585,
+    y: 315,
+    name: 'Samothrace',
+    type: 'Portail',
+    bonus: 'Portail M53',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 89,
+    x: 358,
+    y: 670,
+    name: 'Alalcomenae',
+    type: 'PROD T',
+    bonus: 'Réduit le coût des unités terrestres de 6%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
     id: 90,
     x: 369,
     y: 333,
@@ -623,6 +1043,42 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 91,
+    x: 332,
+    y: 356,
+    name: 'Monastiraki',
+    type: '3% OFF',
+    bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 92,
+    x: 518,
+    y: 286,
+    name: 'Hyele',
+    type: 'OFF NAV',
+    bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'tocomplete',
+    focus: true
+  },
+  {
+    id: 93,
+    x: 612,
+    y: 688,
+    name: 'Agrinion',
+    type: 'Portail',
+    bonus: 'Portail M66',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
   },
   {
     id: 94,
@@ -649,6 +1105,30 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 96,
+    x: 282,
+    y: 461,
+    name: 'Edessa',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive des Combattants à l\'épée de 15%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 97,
+    x: 553,
+    y: 306,
+    name: 'Cythera',
+    type: 'OFF T',
+    bonus: 'Augmente la puissance offensive de Cavaliers de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 98,
     x: 719,
     y: 467,
@@ -661,27 +1141,51 @@ const staticTemples = [
     focus: false
   },
   {
-    id: 99,
-    x: 320,
-    y: 627,
-    name: 'Sparte',
-    type: 'Portail',
-    bonus: 'Portail vers Olympus',
+    id: 100,
+    x: 590,
+    y: 707,
+    name: 'Kilkís',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive des hoplites de 15%',
     size: 'small',
     owner: 0,
-    contest: 'none',
-    focus: false
+    contest: 'contested',
+    focus: true
   },
   {
     id: 101,
-    x: 358,
-    y: 670,
-    name: 'Alalcomenae',
-    type: 'PROD T',
-    bonus: 'Réduit le coût des unités terrestres de 6%',
+    x: 487,
+    y: 476,
+    name: 'Thronium',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive des Combattants à l\'épée de 15%',
     size: 'small',
     owner: 0,
-    contest: 'none',
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 101,
+    x: 302,
+    y: 400,
+    name: 'Taras',
+    type: 'DEF',
+    bonus: '2% DEF',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 101,
+    x: 320,
+    y: 629,
+    name: 'Sparte',
+    type: 'Portail',
+    bonus: 'Portail M36',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
     focus: true
   },
   {
@@ -707,6 +1211,30 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 104,
+    x: 296,
+    y: 495,
+    name: 'Mallia',
+    type: 'PROD T',
+    bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 6%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
+  },
+  {
+    id: 105,
+    x: 374,
+    y: 309,
+    name: 'Itanos',
+    type: 'Portail',
+    bonus: 'Portail M33',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 106,
@@ -757,6 +1285,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 110,
+    x: 258,
+    y: 538,
+    name: 'Pandosia',
+    type: 'PROD T',
+    bonus: 'Réduit le coût des unités terrestres de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
     id: 111,
     x: 568,
     y: 264,
@@ -779,6 +1319,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 113,
+    x: 303,
+    y: 373,
+    name: 'Gonnos',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 114,
@@ -805,6 +1357,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 116,
+    x: 741,
+    y: 482,
+    name: 'Antipatrea',
+    type: 'DEF',
+    bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
     id: 117,
     x: 263,
     y: 434,
@@ -815,6 +1379,42 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 118,
+    x: 500,
+    y: 728,
+    name: 'Kepoi',
+    type: 'Portail',
+    bonus: 'Portail M57',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
+    id: 119,
+    x: 432,
+    y: 279,
+    name: 'Pseira',
+    type: 'Portail',
+    bonus: 'Portail M42',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
+  },
+  {
+    id: 120,
+    x: 724,
+    y: 592,
+    name: 'Magnesia',
+    type: 'PROD NAV',
+    bonus: 'Réduit le coût des unités navales de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
   },
   {
     id: 121,
@@ -851,6 +1451,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 124,
+    x: 579,
+    y: 289,
+    name: 'Sicyon',
+    type: 'Portail',
+    bonus: 'Portail M52',
+    size: 'small',
+    owner: 0,
+    contest: 'contested',
+    focus: true
   },
   {
     id: 125,
@@ -911,6 +1523,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 130,
+    x: 449,
+    y: 244,
+    name: 'Morgantina',
+    type: 'OFF NAV',
+    bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
+    size: 'small',
+    owner: 0,
+    contest: 'secured',
+    focus: true
   },
   {
     id: 131,
@@ -985,6 +1609,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 137,
+    x: 723,
+    y: 650,
+    name: 'Knossos',
+    type: 'PROD T',
+    bonus: 'Réduit le coût des unités terrestres de 6%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
     id: 138,
     x: 256,
     y: 605,
@@ -1021,6 +1657,18 @@ const staticTemples = [
     focus: false
   },
   {
+    id: 141,
+    x: 536,
+    y: 254,
+    name: 'Larissa',
+    type: '3% OFF',
+    bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
     id: 142,
     x: 757,
     y: 428,
@@ -1043,6 +1691,30 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 144,
+    x: 306,
+    y: 319,
+    name: 'Tauromenion',
+    type: '3% OFF',
+    bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
+  },
+  {
+    id: 145,
+    x: 341,
+    y: 308,
+    name: 'Apamea',
+    type: '3% OFF',
+    bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
   },
   {
     id: 146,
@@ -1079,6 +1751,18 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: false
+  },
+  {
+    id: 149,
+    x: 480,
+    y: 248,
+    name: 'Alexándreia',
+    type: 'PROD T',
+    bonus: 'Réduit tous les coûts de recrutement d\'unités terrestres de 10%',
+    size: 'small',
+    owner: 0,
+    contest: 'none',
+    focus: true
   },
   {
     id: 150,
