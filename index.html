@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>Carte – fr176 (mers 22 → 77)</title>
 <style>
-/* ─────────── mise en page générale ─────────── */
+/* ───────── mise en page générale ───────── */
 body{margin:0;background:#111;color:#ccc;font-family:sans-serif;
      display:flex;flex-direction:column;align-items:center}
 #topbar{margin-top:12px;display:flex;gap:24px;flex-wrap:wrap}
@@ -13,21 +13,19 @@ body{margin:0;background:#111;color:#ccc;font-family:sans-serif;
 select,button{padding:4px;font-size:14px}
 input[type=color]{border:none;width:22px;height:22px;padding:0}
 
-/* ─────────── zone carte ─────────── */
+/* ──────── zone carte ──────── */
 #mapWrapper{position:relative;margin-top:12px}
 canvas{border:2px solid #444}
 
-/* ─────────── légende alliances/joueurs ─────────── */
+/* ──────── légende alliances/joueurs ──────── */
 #legend{position:fixed;top:10px;left:10px;display:flex;flex-direction:column;
         gap:4px;font-size:14px;z-index:5}
 .row{display:flex;align-items:center;gap:4px}
 .row input[type=checkbox]{margin:0}
 
-/* ─────────── panneau temples (droite) ─────────── */
+/* ──────── panneau temples (droite) ──────── */
 #templePanel{
-  position:fixed;             /* ↓ on le décale vers le bas : n’écrase plus la barre */
-  top:90px;                   /*  ← ajustable si besoin                                    */
-  right:10px;width:190px;
+  position:fixed;top:88px;right:10px;width:200px;
   display:flex;flex-direction:column;gap:8px;
   font-size:14px;z-index:5
 }
@@ -35,7 +33,7 @@ canvas{border:2px solid #444}
               color:#eee;border-radius:4px}
 .tplRow{display:flex;align-items:center;gap:6px}
 
-/* ─────────── tooltip instantané ─────────── */
+/* ──────── tooltip ──────── */
 #tooltip{
   position:fixed;pointer-events:none;z-index:999;
   max-width:220px;padding:4px 6px;border-radius:4px;
@@ -44,7 +42,7 @@ canvas{border:2px solid #444}
   display:none;white-space:pre-line;
 }
 
-/* ─────────── temples sur carte ─────────── */
+/* ──────── temples sur carte ──────── */
 .templeIcon{position:absolute;left:0;top:0;width:24px;height:24px;
             transform:translate(-12px,-12px);pointer-events:auto}
 .templeIcon::before{content:"";position:absolute;inset:0;border-radius:50%;
@@ -54,10 +52,9 @@ canvas{border:2px solid #444}
 .templeIcon.contested::before  {background:#ff1744}
 .templeIcon.none::before       {display:none}
 
-/* surbrillance (match recherche) */
+/* surbrillance recherche */
 .templeIcon.match::after{
-  content:"";
-  position:absolute;inset:0;border:2px solid #fff;
+  content:"";position:absolute;inset:0;border:2px solid #fff;
   box-sizing:border-box;transform:translate(-2px,-1px);pointer-events:none;
 }
 
@@ -70,7 +67,7 @@ canvas{border:2px solid #444}
 .sprite.large,.tplSprite.large{background-position:-84px  -51px}
 .sprite.olympus,.tplSprite.olympus{background-position:-60px -51px}
 
-/* filtres de teinte (appliqués quand classe présente) */
+/* filtres teinte */
 .red   {filter:hue-rotate(-60deg)saturate(8) brightness(1.25) contrast(1.1)}
 .green {filter:hue-rotate( 90deg)saturate(4)}
 .blue  {filter:hue-rotate(200deg)saturate(4)}
@@ -82,7 +79,7 @@ canvas{border:2px solid #444}
 </head>
 <body>
 
-<!-- ─────────── barre de contrôle ─────────── -->
+<!-- ───── barre de contrôle ───── -->
 <div id="topbar">
   <div class="bar">Joueur : <select id="playerSel"></select><button id="addPlayer">＋</button></div>
   <div class="bar">Alliance : <select id="allySel"></select><button id="addAlly">＋</button></div>
@@ -97,7 +94,6 @@ canvas{border:2px solid #444}
   </div>
 </div>
 
-<!-- légende alliances/joueurs -->
 <div id="legend"></div>
 
 <!-- panneau temples -->
@@ -112,30 +108,26 @@ canvas{border:2px solid #444}
 
 <script src="mapData.js"></script>
 <script>
-/* ─── constantes carte ─── */
+/* ─── Constantes carte ─── */
 const VIEW=6,CELL=100,SIZE=800,SCALE=SIZE/(VIEW*CELL);
 const BX=2,BY=2,X_MIN=BX*CELL,Y_MIN=BY*CELL,X_MAX=X_MIN+VIEW*CELL,Y_MAX=Y_MIN+VIEW*CELL;
 
-/* groupes fixes */
-const GROUPS={
-  molky :{ids:[186,368],color:'#ff0000'},
-  allies:{ids:[335,19,239],color:'#00CCFF'},
-  cafe  :{ids:[3,350],color:'#ff8c00'}
-};
+/* Groupes fixes (alliances) */
+const GROUPS={ molky:{ids:[186,368],color:'#ff0000'},
+               allies:{ids:[335,19,239],color:'#00CCFF'},
+               cafe:{ids:[3,350],color:'#ff8c00'} };
 
-/* couleurs pour temple */
-const COLOR_BY_TYPE={
-  'OFF T':'yellow','OFF NAV':'red','PROD T':'green','PROD NAV':'blue',
-  '3% OFF':'violet','Portail':'white','DEF':'black'
-};
+/* Couleur par type de temple */
+const COLOR_BY_TYPE={ 'OFF T':'yellow','OFF NAV':'red','PROD T':'green',
+  'PROD NAV':'blue','3% OFF':'violet','Portail':'white','DEF':'black' };
 
-/* palettes et états */
+/* États UI */
 const palette=['#00ffff','#ff7f00','#00ff00','#ff00ff','#ffff00','#00bfff',
                '#ff1493','#7fff00','#ff4500','#20b2aa'];
 let palIdx=0;
 const visA={},colA={},visP={},colP={};
 
-/* ─── DOM refs ─── */
+/* DOM refs */
 const mapWrapper=document.getElementById('mapWrapper');
 const canvas=document.getElementById('map'),ctx=canvas.getContext('2d');
 const playerSel=document.getElementById('playerSel'),addPlayer=document.getElementById('addPlayer');
@@ -149,85 +141,89 @@ const chkAllies=document.getElementById('chkAllies');
 const chkCafe=document.getElementById('chkCafe');
 const chkContest=document.getElementById('chkContest');
 const chkColor=document.getElementById('chkColor');
-const chkFocus=document.getElementById('chkFocus');   /* ← nouveau ref */
+const chkFocus=document.getElementById('chkFocus');
 
-/* listes déroulantes */
+/* Listes déroulantes */
 mapData.players.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr'))
   .forEach(p=>playerSel.add(new Option(p.name,p.id)));
 mapData.alliances.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr'))
   .forEach(a=>allySel.add(new Option(a.name,a.id)));
 
-/* ───────── légende temples ───────── */
+/* Légende types de temples */
 Object.entries(COLOR_BY_TYPE).forEach(([type,col])=>{
-  const row=document.createElement('div');row.className='tplRow';
+  const row=document.createElement('div');
+  row.className='tplRow';
   row.innerHTML=`<div class="tplSprite small ${col}"></div><span>${type}</span>`;
   templeLegend.append(row);
 });
 
-/* ─── légende alliances/joueurs ─── */
+/* Fonctions d’ajout / retrait dans la légende joueurs-alliances */
 function addRow(id,label,color,vis,col){
   if(vis[id])return;
   vis[id]=true;col[id]=color;
   const row=document.createElement('div');row.className='row';row.dataset.aid=id;
-  const cb=document.createElement('input');cb.type='checkbox';cb.checked=true;
+  row.innerHTML=`<input type="checkbox" checked>
+                 <input type="color" value="${color}">
+                 ${label}`;
+  const [cb,cp]=row.querySelectorAll('input');
   cb.onchange=()=>{vis[id]=cb.checked;draw();};
-  const cp=document.createElement('input');cp.type='color';cp.value=color;
-  cp.oninput=()=>{col[id]=cp.value;draw();};
-  row.append(cb,cp,document.createTextNode(label));
+  cp.oninput =()=>{col[id]=cp.value;draw();};
   legend.append(row);
 }
 function removeRow(id,vis){
   const row=legend.querySelector(`.row[data-aid="${id}"]`);
-  if(row)legend.removeChild(row);delete vis[id];
+  if(row)legend.removeChild(row);
+  delete vis[id];
 }
 
-/* boutons ajout */
+/* Boutons + */
 addPlayer.onclick=()=>{
   const p=mapData.players.find(x=>x.id==playerSel.value);
-  if(p)addRow(p.id,p.name,palette[palIdx++%palette.length],visP,colP),draw();
+  if(p) addRow(p.id,p.name,palette[palIdx++%palette.length],visP,colP),draw();
 };
 addAlly.onclick=()=>{
   const a=mapData.alliances.find(x=>x.id==allySel.value);
-  if(a)addRow(a.id,a.name,palette[palIdx++%palette.length],visA,colA),draw();
+  if(a) addRow(a.id,a.name,palette[palIdx++%palette.length],visA,colA),draw();
 };
 
-/* groupes */
+/* Groupes fixes */
 function toggleGroup(box,g){
   g.ids.forEach(id=>{
-    box.checked?addRow(id,mapData.alliances.find(a=>a.id==id)?.name||`Alliance ${id}`,g.color,visA,colA)
-               :removeRow(id,visA);
+    box.checked ? addRow(id,mapData.alliances.find(a=>a.id==id)?.name||`Alliance ${id}`,
+                         g.color,visA,colA)
+                : removeRow(id,visA);
   });
   draw();
 }
 chkMolky.onchange  =()=>toggleGroup(chkMolky ,GROUPS.molky );
 chkAllies.onchange =()=>toggleGroup(chkAllies,GROUPS.allies);
 chkCafe.onchange   =()=>toggleGroup(chkCafe  ,GROUPS.cafe  );
-chkContest.onchange=draw;
-chkColor.onchange  =draw;
-chkFocus.onchange  =draw;     /* ← nouveau */
+[chkContest,chkColor,chkFocus].forEach(el=>el.onchange=draw);
 
-/* ─── recherche (nom + type + bonus) ─── */
+/* Recherche temps réel */
 searchInput.addEventListener('input',applyHighlight);
 function applyHighlight(){
   const term=searchInput.value.trim().toLowerCase();
   document.querySelectorAll('.templeIcon').forEach(el=>{
-    const inName = el.dataset.name.includes(term);
-    const inType = el.dataset.tmpltype.includes(term);
-    const inBonus= el.dataset.bonus.includes(term);
-    el.classList.toggle('match',term && (inName||inType||inBonus));
+    const hit = term && (
+      el.dataset.name.includes(term) ||
+      el.dataset.tmpltype.includes(term) ||
+      el.dataset.bonus.includes(term)
+    );
+    el.classList.toggle('match',hit);
   });
 }
 
-/* tooltip helpers */
+/* Tooltip */
 function showTip(txt,x,y){
   tooltip.textContent=txt;
   tooltip.style.left=`${x+12}px`;
   tooltip.style.top =`${y+12}px`;
   tooltip.style.display='block';
 }
-function hideTip(){tooltip.style.display='none';}
+const hideTip=()=>tooltip.style.display='none';
 
-/* offsets mini */
+/* Points villes */
 const OFF=[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1],
            [2,0],[-2,0],[0,2],[0,-2],[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[-1,2],[1,-2]];
 const toPx=(c,o)=>(c-o)*SCALE;
@@ -238,77 +234,89 @@ function dot(t,r){
   ctx.lineWidth=.5;ctx.strokeStyle='#000';ctx.stroke();
 }
 
-/* ─── rendu temples ─── */
+/* Temples */
 function drawTemples(){
   mapWrapper.querySelectorAll('.templeIcon').forEach(e=>e.remove());
-  if(!Array.isArray(mapData.temples))return;
-
   const showContest=chkContest.checked;
   const showColor  =chkColor.checked;
   const onlyFocus  =chkFocus.checked;
 
   mapData.temples.forEach(t=>{
-    if(t.x<X_MIN||t.x>=X_MAX||t.y<Y_MIN||t.y>=Y_MAX)return;
-    if(onlyFocus && !t.focus) return;
+    if(t.x<X_MIN||t.x>=X_MAX||t.y<Y_MIN||t.y>=Y_MAX) return;
 
-    const status=(showContest&&t.contest&&t.contest!=='none')?t.contest:'none';
+    /* --- conversion fiable de focus --- */
+    const isFocus = t.focus===true || String(t.focus).toLowerCase()==='true';
+
+    if(onlyFocus && !isFocus) return;          // on ne garde que nos temples
+
+    const status = (showContest && t.contest && t.contest!=='none')
+                   ? t.contest : 'none';
 
     const box=document.createElement('div');
     box.className=`templeIcon ${status}`.trim();
     box.style.left=`${toPx(t.x,X_MIN)}px`;
     box.style.top =`${toPx(t.y,Y_MIN)}px`;
-    box.dataset.name=t.name.toLowerCase();
-    box.dataset.tmpltype=(t.type||'').toLowerCase();
-    box.dataset.bonus=(t.bonus||'').toLowerCase();
+    box.dataset.name    = (t.name||'').toLowerCase();
+    box.dataset.tmpltype= (t.type||'').toLowerCase();
+    box.dataset.bonus   = (t.bonus||'').toLowerCase();
 
-    /* tooltip events */
-    box.addEventListener('mouseenter',e=>showTip(`${t.name}\n${t.bonus}`,e.clientX,e.clientY));
-    box.addEventListener('mousemove',e=>{tooltip.style.left=`${e.clientX+12}px`;tooltip.style.top=`${e.clientY+12}px`;});
-    box.addEventListener('mouseleave',hideTip);
+    box.onmouseenter=e=>showTip(`${t.name}\n${t.bonus}`,e.clientX,e.clientY);
+    box.onmousemove =e=>{tooltip.style.left=`${e.clientX+12}px`;
+                          tooltip.style.top =`${e.clientY+12}px`;};
+    box.onmouseleave=hideTip;
 
     const sp=document.createElement('div');
     sp.className=`sprite ${t.size||'small'}`;
     const colClass=COLOR_BY_TYPE[t.type];
-    if(showColor&&colClass)sp.classList.add(colClass);
+    if(showColor && colClass) sp.classList.add(colClass);
 
     box.append(sp);
     mapWrapper.append(box);
   });
-  applyHighlight();
+
+  applyHighlight(); // conserve la surbrillance après redraw
 }
 
-/* ─── fond mer ─── */
+/* Fond mer */
 const water=new Image();
 water.src='assets/water_base.png';
-water.onload=draw;water.onerror=draw;
+water.onload=draw;
+water.onerror=draw;
 
-/* ─── rendu principal ─── */
+/* Rendu principal */
 function draw(){
-  ctx.fillStyle=water.complete&&water.naturalWidth?ctx.createPattern(water,'repeat'):'#0a4c82';
+  ctx.fillStyle=water.complete&&water.naturalWidth
+      ? ctx.createPattern(water,'repeat') : '#0a4c82';
   ctx.fillRect(0,0,SIZE,SIZE);
 
-  /* villes */
+  /* villes (alliances puis joueurs) */
   mapData.alliances.forEach(a=>{
     if(!visA[a.id])return;
     ctx.fillStyle=colA[a.id];
-    a.towns.forEach(t=>{if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,2);});
+    a.towns.forEach(t=>{
+      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX) dot(t,2);
+    });
   });
   mapData.players.forEach(p=>{
     if(!visP[p.id])return;
     ctx.fillStyle=colP[p.id];
-    p.towns.forEach(t=>{if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX)dot(t,2);});
+    p.towns.forEach(t=>{
+      if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX) dot(t,2);
+    });
   });
 
-  /* grille mers */
+  /* grille mers & numéros */
   ctx.strokeStyle='rgba(255,255,255,0.2)';ctx.lineWidth=1;
   for(let i=1;i<VIEW;i++){
     const p=i*CELL*SCALE;
     ctx.beginPath();ctx.moveTo(p,0);ctx.lineTo(p,SIZE);ctx.stroke();
     ctx.beginPath();ctx.moveTo(0,p);ctx.lineTo(SIZE,p);ctx.stroke();
   }
-  ctx.fillStyle='rgba(255,255,255,0.25)';ctx.font='14px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
-  for(let r=0;r<VIEW;r++)for(let c=0;c<VIEW;c++)
-    ctx.fillText(`${BX+c}${BY+r}`,(c*CELL+50)*SCALE,(r*CELL+50)*SCALE);
+  ctx.fillStyle='rgba(255,255,255,0.25)';
+  ctx.font='14px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  for(let r=0;r<VIEW;r++)
+    for(let c=0;c<VIEW;c++)
+      ctx.fillText(`${BX+c}${BY+r}`,(c*CELL+50)*SCALE,(r*CELL+50)*SCALE);
 
   /* cercle 60 % */
   ctx.strokeStyle='rgba(0,0,0,0.7)';ctx.lineWidth=2;
@@ -317,6 +325,9 @@ function draw(){
   /* temples */
   drawTemples();
 }
+
+/* premier rendu immédiat (pas besoin d’action manuelle) */
+draw();
 </script>
 </body>
 </html>
