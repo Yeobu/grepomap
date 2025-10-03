@@ -90,6 +90,7 @@ canvas{border:2px solid #444}
     <label><input type="checkbox" id="chkCafe"> Café clopes</label>
     <label><input type="checkbox" id="chkContest"> Contest</label>
     <label><input type="checkbox" id="chkColor" checked> Colorer temples</label>
+    <label><input type="checkbox" id="chkFocus"  checked> Nos temples</label>
   </div>
 </div>
 
@@ -239,9 +240,11 @@ function drawTemples(){
 
   const showContest=chkContest.checked;
   const showColor  =chkColor.checked;
+  const onlyFocus = chkFocus.checked;
 
   mapData.temples.forEach(t=>{
     if(t.x<X_MIN||t.x>=X_MAX||t.y<Y_MIN||t.y>=Y_MAX)return;
+    if(onlyFocus && !t.focus) return;
 
     const status=(showContest&&t.contest&&t.contest!=='none')?t.contest:'none';
 
