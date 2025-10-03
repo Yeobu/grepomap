@@ -5,7 +5,7 @@ const staticTemples = [
       y: 476,
       name: 'Thronium',
       type: 'DEF',
-      bonus: '15% CE',
+      bonus: 'Augmente la valeur défensive des Combattants à l\'épée de 15%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -16,7 +16,7 @@ const staticTemples = [
       y: 452,
       name: 'Parthenopolis',
       type: 'OFF T',
-      bonus: 'Contondant 8%',
+      bonus: 'Augmente toutes les valeurs offensives des armes Contondant de 8%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -38,7 +38,7 @@ const staticTemples = [
       y: 433,
       name: 'Histria',
       type: 'OFF T',
-      bonus: '6% OFF T HORS UMV',
+      bonus: 'Augmente la valeur offensive de toutes les unités terrestres non mythiques de 6%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -60,7 +60,7 @@ const staticTemples = [
       y: 358,
       name: 'Smyrna',
       type: 'OFF T',
-      bonus: '10% OFF CAVA',
+      bonus: 'Augmente la puissance offensive de Cavaliers de 10%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -71,7 +71,7 @@ const staticTemples = [
       y: 482,
       name: 'Antipatrea',
       type: 'DEF',
-      bonus: '2% DEF',
+      bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -82,7 +82,7 @@ const staticTemples = [
       y: 352,
       name: 'Lekhaion',
       type: 'PROD NAV',
-      bonus: '10% COÛT NAV',
+      bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 10%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -104,7 +104,7 @@ const staticTemples = [
       y: 342,
       name: 'Pitane',
       type: 'PROD NAV',
-      bonus: '4.5% Durée',
+      bonus: 'Réduit toutes les durées de recrutement d\'unités terrestres de 4.5%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -126,7 +126,7 @@ const staticTemples = [
       y: 306,
       name: 'Cythera',
       type: 'OFF T',
-      bonus: '10% CAVA',
+      bonus: 'Augmente la puissance offensive de Cavaliers de 10%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -148,7 +148,7 @@ const staticTemples = [
       y: 317,
       name: 'Tylissos',
       type: 'DEF',
-      bonus: '2% DEF',
+      bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -159,7 +159,7 @@ const staticTemples = [
       y: 305,
       name: 'Zakynthos',
       type: 'OFF T',
-      bonus: '8% OFF CONTONDANT',
+      bonus: 'Augmente toutes les valeurs offensives des armes Contondant de 8%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -170,7 +170,7 @@ const staticTemples = [
       y: 286,
       name: 'Hyele',
       type: 'OFF NAV',
-      bonus: '8% BF',
+      bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
       size: 'small',
       owner: 0,
       contest: 'tocomplete'
@@ -192,7 +192,7 @@ const staticTemples = [
       y: 254,
       name: 'Larissa',
       type: '3% OFF',
-      bonus: '3% OFF',
+      bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -203,7 +203,7 @@ const staticTemples = [
       y: 364,
       name: 'Kallatis',
       type: 'OFF NAV',
-      bonus: '5% OFF NAV',
+      bonus: 'Augmente la valeur offensive de toutes les unités navales de 5%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -225,7 +225,7 @@ const staticTemples = [
       y: 373,
       name: 'Mylasa',
       type: '3% OFF',
-      bonus: '3% OFF FH',
+      bonus: 'Force héroïque augmente l\'attaque de toutes les unités de 3%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -236,7 +236,7 @@ const staticTemples = [
       y: 425,
       name: 'Samos',
       type: 'OFF T',
-      bonus: '8% off contondant',
+      bonus: 'Augmente toutes les valeurs offensives des armes Contondant de 8%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -247,7 +247,7 @@ const staticTemples = [
       y: 478,
       name: 'Sozopolis',
       type: 'DEF',
-      bonus: '+15% DEF Archers',
+      bonus: 'Augmente la valeur défensive des Archers de 15%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -258,7 +258,7 @@ const staticTemples = [
       y: 462,
       name: 'Scione',
       type: 'OFF NAV',
-      bonus: '+8% OFF BF',
+      bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -269,7 +269,7 @@ const staticTemples = [
       y: 486,
       name: 'Mulai',
       type: 'OFF NAV',
-      bonus: '+10% VENT FAVORABLE',
+      bonus: 'Améliore la force de vent favorable de 10%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -291,7 +291,7 @@ const staticTemples = [
       y: 499,
       name: 'Gortyn',
       type: 'DEF',
-      bonus: '2% DEF',
+      bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -302,7 +302,7 @@ const staticTemples = [
       y: 459,
       name: 'Rhodes',
       type: 'PROD NAV',
-      bonus: '6% COÛT NAV',
+      bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 6%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -313,7 +313,7 @@ const staticTemples = [
       y: 440,
       name: 'Élis',
       type: 'PROD T',
-      bonus: '4.5% durée terr',
+      bonus: 'Réduit toutes les durées de recrutement d\'unités terrestres de 4.5%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -335,7 +335,7 @@ const staticTemples = [
       y: 495,
       name: 'Mallia',
       type: 'PROD T',
-      bonus: '6% COÛT NAV',
+      bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 6%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -346,7 +346,7 @@ const staticTemples = [
       y: 495,
       name: 'Mallia',
       type: 'PROD T',
-      bonus: '6% COÛT NAV',
+      bonus: 'Réduire tous les coûts de recrutement d\'unités navales de 6%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -357,7 +357,7 @@ const staticTemples = [
       y: 461,
       name: 'Edessa',
       type: 'DEF',
-      bonus: '+15% DEF CE',
+      bonus: 'Augmente la valeur défensive des Combattants à l\'épée de 15%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -379,7 +379,7 @@ const staticTemples = [
       y: 373,
       name: 'Gonnos',
       type: 'DEF',
-      bonus: '2% DEF',
+      bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -390,7 +390,7 @@ const staticTemples = [
       y: 356,
       name: 'Monastiraki',
       type: '3% OFF',
-      bonus: '3% OFF',
+      bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -401,7 +401,7 @@ const staticTemples = [
       y: 319,
       name: 'Tauromenion',
       type: '3% OFF',
-      bonus: '3% OFF',
+      bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -412,7 +412,7 @@ const staticTemples = [
       y: 308,
       name: 'Apamea',
       type: '3% OFF',
-      bonus: '3% OFF',
+      bonus: 'Augmente la valeur offensive de toutes les unités de 3%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -445,7 +445,7 @@ const staticTemples = [
       y: 244,
       name: 'Morgantina',
       type: 'OFF NAV',
-      bonus: '+8% OFF BF',
+      bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -456,7 +456,7 @@ const staticTemples = [
       y: 248,
       name: 'Alexándreia',
       type: 'PROD T',
-      bonus: '10% COÛT TERR',
+      bonus: 'Réduit tous les coûts de recrutement d\'unités terrestres de 10%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -467,7 +467,7 @@ const staticTemples = [
       y: 566,
       name: 'Heraclea',
       type: 'OFF T',
-      bonus: '+8% OFF TERR HORS UMV',
+      bonus: 'Augmente la valeur offensive de toutes les unités terrestres non mythiques de 8%',
       size: 'small',
       owner: 0,
       contest: 'tocomplete'
@@ -489,7 +489,7 @@ const staticTemples = [
       y: 576,
       name: 'Rhêgion',
       type: 'OFF T',
-      bonus: '+8% Contondant',
+      bonus: 'Augmente la valeur offensive des armes Contondant de 8%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -500,7 +500,7 @@ const staticTemples = [
       y: 593,
       name: 'Kasmenai',
       type: 'DEF',
-      bonus: '+15% DEF Archers',
+      bonus: 'Augmente la valeur défensive des archers de 15%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -511,7 +511,7 @@ const staticTemples = [
       y: 592,
       name: 'Magnesia',
       type: 'PROD NAV',
-      bonus: '10% COÛT NAV',
+      bonus: 'Réduit le coût des unités navales de 10%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -522,7 +522,7 @@ const staticTemples = [
       y: 625,
       name: 'Kalamata',
       type: 'PROD NAV',
-      bonus: '10% COÛT NAV',
+      bonus: 'Réduit le coût des unités navales de 10%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -533,7 +533,7 @@ const staticTemples = [
       y: 650,
       name: 'Knossos',
       type: 'PROD T',
-      bonus: '6% COÛT TERR',
+      bonus: 'Réduit le coût des unités terrestres de 6%',
       size: 'small',
       owner: 0,
       contest: 'none'
@@ -555,7 +555,7 @@ const staticTemples = [
       y: 707,
       name: 'Kilkís',
       type: 'DEF',
-      bonus: '+15% DEF HOPLITES',
+      bonus: 'Augmente la valeur défensive des hoplites de 15%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -588,7 +588,7 @@ const staticTemples = [
       y: 640,
       name: 'Pixous',
       type: 'REPROD T',
-      bonus: '10% COÛT TERR',
+      bonus: 'Réduit le coût des unités terrestres de 10%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -610,7 +610,7 @@ const staticTemples = [
       y: 690,
       name: 'Pharos',
       type: 'DEF',
-      bonus: '2% DEF',
+      bonus: 'Augmente la valeur défensive de toutes les unités de 2%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -621,7 +621,7 @@ const staticTemples = [
       y: 538,
       name: 'Pandosia',
       type: 'PROD T',
-      bonus: '10% COÛT TERR',
+      bonus: 'Réduit le coût des unités terrestres de 10%',
       size: 'small',
       owner: 0,
       contest: 'secured'
@@ -632,7 +632,7 @@ const staticTemples = [
       y: 611,
       name: 'Argos',
       type: 'OFF T',
-      bonus: '8% Contondant',
+      bonus: 'Augmente la valeur offensive des armes Contondant de 8%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -654,7 +654,7 @@ const staticTemples = [
       y: 642,
       name: 'Cnide',
       type: 'OFF NAV',
-      bonus: '8% BF',
+      bonus: 'Augmente la puissance offensive de Bateaux-feux de 8%',
       size: 'small',
       owner: 0,
       contest: 'contested'
@@ -665,7 +665,7 @@ const staticTemples = [
       y: 670,
       name: 'Alalcomenae',
       type: 'PROD T',
-      bonus: '6% COÛT TERR',
+      bonus: 'Réduit le coût des unités terrestres de 6%',
       size: 'small',
       owner: 0,
       contest: 'none'
