@@ -25,7 +25,9 @@ canvas{border:2px solid #444}
 
 /* ─────────── panneau temples (droite) ─────────── */
 #templePanel{
-  position:fixed;top:10px;right:10px;width:190px;
+  position:fixed;             /* ↓ on le décale vers le bas : n’écrase plus la barre */
+  top:90px;                   /*  ← ajustable si besoin                                    */
+  right:10px;width:190px;
   display:flex;flex-direction:column;gap:8px;
   font-size:14px;z-index:5
 }
@@ -84,13 +86,14 @@ canvas{border:2px solid #444}
 <div id="topbar">
   <div class="bar">Joueur : <select id="playerSel"></select><button id="addPlayer">＋</button></div>
   <div class="bar">Alliance : <select id="allySel"></select><button id="addAlly">＋</button></div>
+
   <div class="groupBar">
     <label><input type="checkbox" id="chkMolky"> Molky</label>
     <label><input type="checkbox" id="chkAllies"> Alliés</label>
     <label><input type="checkbox" id="chkCafe"> Café clopes</label>
     <label><input type="checkbox" id="chkContest"> Contest</label>
     <label><input type="checkbox" id="chkColor" checked> Colorer temples</label>
-    <label><input type="checkbox" id="chkFocus"  checked> Nos temples</label>
+    <label><input type="checkbox" id="chkFocus" checked> Nos temples</label>
   </div>
 </div>
 
@@ -99,7 +102,7 @@ canvas{border:2px solid #444}
 
 <!-- panneau temples -->
 <div id="templePanel">
-  <input id="templeSearch" placeholder="Rechercher nom,type (OFF, PROD, etc) ou bonus…">
+  <input id="templeSearch" placeholder="Rechercher nom, type ou bonus…">
   <div id="templeLegend"></div>
 </div>
 
@@ -146,6 +149,7 @@ const chkAllies=document.getElementById('chkAllies');
 const chkCafe=document.getElementById('chkCafe');
 const chkContest=document.getElementById('chkContest');
 const chkColor=document.getElementById('chkColor');
+const chkFocus=document.getElementById('chkFocus');   /* ← nouveau ref */
 
 /* listes déroulantes */
 mapData.players.slice().sort((a,b)=>a.name.localeCompare(b.name,'fr'))
@@ -200,6 +204,7 @@ chkAllies.onchange =()=>toggleGroup(chkAllies,GROUPS.allies);
 chkCafe.onchange   =()=>toggleGroup(chkCafe  ,GROUPS.cafe  );
 chkContest.onchange=draw;
 chkColor.onchange  =draw;
+chkFocus.onchange  =draw;     /* ← nouveau */
 
 /* ─── recherche (nom + type + bonus) ─── */
 searchInput.addEventListener('input',applyHighlight);
@@ -240,7 +245,7 @@ function drawTemples(){
 
   const showContest=chkContest.checked;
   const showColor  =chkColor.checked;
-  const onlyFocus = chkFocus.checked;
+  const onlyFocus  =chkFocus.checked;
 
   mapData.temples.forEach(t=>{
     if(t.x<X_MIN||t.x>=X_MAX||t.y<Y_MIN||t.y>=Y_MAX)return;
@@ -301,8 +306,7 @@ function draw(){
     ctx.beginPath();ctx.moveTo(p,0);ctx.lineTo(p,SIZE);ctx.stroke();
     ctx.beginPath();ctx.moveTo(0,p);ctx.lineTo(SIZE,p);ctx.stroke();
   }
-  ctx.fillStyle='rgba(255,255,255,0.25)';
-  ctx.font='14px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
+  ctx.fillStyle='rgba(255,255,255,0.25)';ctx.font='14px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';
   for(let r=0;r<VIEW;r++)for(let c=0;c<VIEW;c++)
     ctx.fillText(`${BX+c}${BY+r}`,(c*CELL+50)*SCALE,(r*CELL+50)*SCALE);
 
