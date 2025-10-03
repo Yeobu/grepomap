@@ -94,7 +94,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 9,
@@ -178,7 +178,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 16,
@@ -310,7 +310,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 27,
@@ -370,7 +370,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 32,
@@ -406,7 +406,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 35,
@@ -418,7 +418,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 36,
@@ -430,7 +430,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 37,
@@ -466,7 +466,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 40,
@@ -550,7 +550,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 47,
@@ -574,7 +574,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 49,
@@ -622,7 +622,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 53,
@@ -754,7 +754,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 64,
@@ -814,7 +814,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 69,
@@ -826,7 +826,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 70,
@@ -838,7 +838,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 71,
@@ -850,7 +850,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 72,
@@ -862,7 +862,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 73,
@@ -886,7 +886,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 75,
@@ -898,7 +898,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 76,
@@ -922,7 +922,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 78,
@@ -934,7 +934,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 79,
@@ -994,7 +994,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 84,
@@ -1018,7 +1018,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 86,
@@ -1054,7 +1054,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 89,
@@ -1066,7 +1066,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 90,
@@ -1114,7 +1114,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 94,
@@ -1162,7 +1162,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 98,
@@ -1186,7 +1186,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 100,
@@ -1198,7 +1198,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 101,
@@ -1210,7 +1210,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 102,
@@ -1246,7 +1246,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 105,
@@ -1258,7 +1258,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 106,
@@ -1438,7 +1438,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 121,
@@ -1486,7 +1486,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 125,
@@ -1558,7 +1558,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 131,
@@ -1726,7 +1726,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 145,
@@ -1738,7 +1738,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: false
+    focus: true
   },
   {
     id: 146,
