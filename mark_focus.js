@@ -1,36 +1,43 @@
 // mark_focus.js
-// -------------------------------------------------------------
-//  node mark_focus.js          ← lance la mise à jour
-// -------------------------------------------------------------
+// -----------------------------------------------------------------
+//  node mark_focus.js
+// -----------------------------------------------------------------
 const XLSX              = require('xlsx');
-const { staticTemples } = require('./save.js');   // ton fichier ci-dessus
+const { staticTemples } = require('./save.js');   // ta liste focus:true
 
-/* 1) Liste des noms que l’on doit passer à true -------------------------- */
-const focusNames = new Set(
-  staticTemples
-    .filter(t => t.focus)
-    .map(t => t.name.trim().toLowerCase())        // on normalise en minuscules
-);
-
-/* 2) Ouverture du classeur ------------------------------------------------ */
-const file   = 'temples.xlsx';
-const wb     = XLSX.readFile(file);
-const sheet  = wb.Sheets['Feuil1'];               // adapte si l’onglet porte un autre nom
-const range  = XLSX.utils.decode_range(sheet['!ref']); // zone utilisée
-
-/* 3) Parcours des lignes (on saute la 1re – l’en-tête) -------------------- */
-for (let R = range.s.r + 1; R <= range.e.r; R++) {
-  const nameCell = sheet[XLSX.utils.encode_cell({ c: 3, r: R })]; // colonne D (indice 3)
-  if (!nameCell) continue;
-
-  const name = String(nameCell.v).trim().toLowerCase();
-  if (!focusNames.has(name)) continue;            // pas dans la liste → on ignore
-
-  /* 4) On inscrit TRUE en colonne K (indice 10) -------------------------- */
-  const focusAddr           = XLSX.utils.encode_cell({ c: 10, r: R });
-  sheet[focusAddr]          = { t: 'b', v: true }; // t = boolean
+/* util : nom canonique sans accents ------------------------------------ */
+function canon (s){
+  return String(s)
+          .normalize('NFD')          // é → e + ́  ,  ê → e + ̂  ,  …
+          .replace(/\p{M}/gu, '')    // supprime tout diacritique
+          .trim()
+          .toLowerCase();
 }
 
-/* 5) Sauvegarde ----------------------------------------------------------- */
-XLSX.writeFile(wb, file);
-console.log('✅ Colonne “Focus” mise à jour (valeur true) pour tous les temples focus.');
+/* 1) Noms des temples à marquer ---------------------------------------- */
+const focusNames = new Set(
+  staticTemples.filter(t => t.focus).map(t => canon(t.name))
+);
+
+/* 2) Lecture du classeur ------------------------------------------------ */
+const FILE   = 'temples.xlsx';
+const wb     = XLSX.readFile(FILE);
+const sheet  = wb.Sheets['Feuil1'];               // adapte l’onglet si besoin
+const range  = XLSX.utils.decode_range(sheet['!ref']); // zone utilisée
+
+/* 3) Balayage des lignes ------------------------------------------------ */
+for (let R = range.s.r + 1; R <= range.e.r; R++) {     // saute l’en-tête
+  const nameAddr  = XLSX.utils.encode_cell({ c: 3,  r: R }); // col. D
+  const focusAddr = XLSX.utils.encode_cell({ c: 10, r: R }); // col. K
+  const cell      = sheet[nameAddr];
+  if (!cell) continue;                               // pas de nom ⇒ ignore
+
+  const isFocus = focusNames.has( canon(cell.v) );
+
+  /* on (re)met la cellule comme texte ---------------------------------- */
+  sheet[focusAddr] = { t: 's', v: isFocus ? 'true' : '' };
+}
+
+/* 4) Sauvegarde --------------------------------------------------------- */
+XLSX.writeFile(wb, FILE);
+console.log('✅ Colonne K mise à jour : true/blank selon focus (accents ignorés).');
