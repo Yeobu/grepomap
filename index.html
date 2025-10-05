@@ -13,11 +13,6 @@ body{margin:0;background:#111;color:#ccc;font-family:sans-serif;
 select,button{padding:4px;font-size:14px}
 input[type=color]{border:none;width:22px;height:22px;padding:0}
 
-/* Slider “Taille villes” */
-#citySize{width:140px;margin-left:6px}
-/* valeur num. à droite du slider */
-#cityVal{min-width:26px;text-align:right;font-variant-numeric:tabular-nums}
-
 /* ───────── Zone carte ───────── */
 #mapWrapper{position:relative;margin-top:12px}
 canvas{border:2px solid #444}
@@ -32,11 +27,18 @@ canvas{border:2px solid #444}
 #templePanel{
   position:fixed;top:88px;right:10px;width:200px;
   display:flex;flex-direction:column;gap:8px;
-  font-size:14px;z-index:5
-}
+  font-size:14px;z-index:5}
 #templeSearch{width:100%;padding:4px;background:#222;border:1px solid #555;
               color:#eee;border-radius:4px}
 .tplRow{display:flex;align-items:center;gap:6px}
+
+/* ───────── Contrôle taille villes (en bas-droite) ───────── */
+#sizeControl{
+  position:fixed;right:10px;bottom:10px;z-index:6;
+  background:#222;padding:6px 8px;border:1px solid #555;border-radius:4px;
+  display:flex;align-items:center;gap:6px;font-size:14px}
+#citySize{width:140px}
+#cityVal{min-width:26px;text-align:right;font-variant-numeric:tabular-nums;color:#fff}
 
 /* ───────── Tooltip ───────── */
 #tooltip{
@@ -44,8 +46,7 @@ canvas{border:2px solid #444}
   max-width:220px;padding:4px 6px;border-radius:4px;
   background:#222;color:#eee;font-size:13px;
   border:1px solid #555;box-shadow:0 0 4px #000;
-  display:none;white-space:pre-line;
-}
+  display:none;white-space:pre-line}
 
 /* ───────── Temples ───────── */
 .templeIcon{position:absolute;left:0;top:0;width:24px;height:24px;
@@ -58,8 +59,7 @@ canvas{border:2px solid #444}
 .templeIcon.none::before       {display:none}
 .templeIcon.match::after{
   content:"";position:absolute;inset:0;border:2px solid #fff;
-  box-sizing:border-box;transform:translate(-2px,-1px);pointer-events:none;
-}
+  box-sizing:border-box;transform:translate(-2px,-1px);pointer-events:none}
 
 /* sprite */
 .sprite,.tplSprite{width:24px;height:24px;
@@ -93,13 +93,6 @@ canvas{border:2px solid #444}
     <label><input type="checkbox" id="chkColor" checked> Colorer temples</label>
     <label><input type="checkbox" id="chkFocus" checked> Nos temples</label>
   </div>
-
-  <!-- Slider taille villes -->
-  <div class="bar">
-    Taille villes :
-    <input type="range" id="citySize" min="0" max="100" value="0">
-    <span id="cityVal">2</span>
-  </div>
 </div>
 
 <div id="legend"></div>
@@ -113,6 +106,13 @@ canvas{border:2px solid #444}
 <!-- Carte + tooltip -->
 <div id="mapWrapper"><canvas id="map" width="800" height="800"></canvas></div>
 <div id="tooltip"></div>
+
+<!-- Slider taille villes (bas-droite) -->
+<div id="sizeControl">
+  Taille villes :
+  <input type="range" id="citySize" min="0" max="100" value="0">
+  <span id="cityVal">2</span>
+</div>
 
 <script src="mapData.js"></script>
 <script>
@@ -139,7 +139,7 @@ const palette=['#00ffff','#ff7f00','#00ff00','#ff00ff','#ffff00','#00bfff',
 let palIdx=0;
 const visA={},colA={},visP={},colP={};
 
-/* Rayon villes (min 2 → max 8) piloté par slider */
+/* Rayon villes (slider) */
 const minR=2,maxR=8;
 let cityRadius=minR;
 
@@ -168,7 +168,6 @@ citySize.oninput=()=>{
   cityVal.textContent=cityRadius.toFixed(0);
   draw();
 };
-/* valeur initiale */
 cityVal.textContent=minR;
 
 /* Listes déroulantes */
@@ -240,7 +239,7 @@ function applyHighlight(){
   });
 }
 
-/* Tooltip helpers */
+/* Tooltip */
 function showTip(txt,x,y){
   tooltip.textContent=txt;
   tooltip.style.left=`${x+12}px`;
@@ -249,7 +248,7 @@ function showTip(txt,x,y){
 }
 const hideTip=()=>tooltip.style.display='none';
 
-/* Offsets pour dispersion dans la mer */
+/* Offsets dispersion mini-points */
 const OFF=[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1],
            [2,0],[-2,0],[0,2],[0,-2],[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[-1,2],[1,-2]];
 const toPx=(c,o)=>(c-o)*SCALE;
