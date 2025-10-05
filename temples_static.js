@@ -1690,7 +1690,7 @@ const staticTemples = [
     size: 'small',
     owner: 0,
     contest: 'none',
-    focus: true
+    focus: false
   },
   {
     id: 142,
