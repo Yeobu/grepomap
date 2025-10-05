@@ -18,7 +18,8 @@ input[type=color]{border:none;width:22px;height:22px;padding:0}
 canvas{border:2px solid #444}
 
 /* ───────── Légende alliances/joueurs ───────── */
-#legend{position:fixed;top:10px;left:10px;display:flex;flex-direction:column;
+#legend{position:fixed;top:60px;left:10px;               /* ← déplacé plus bas */
+        display:flex;flex-direction:column;
         gap:4px;font-size:14px;z-index:5}
 .row{display:flex;align-items:center;gap:4px}
 .row input[type=checkbox]{margin:0}
@@ -107,7 +108,7 @@ canvas{border:2px solid #444}
 <div id="mapWrapper"><canvas id="map" width="800" height="800"></canvas></div>
 <div id="tooltip"></div>
 
-<!-- Slider taille villes (bas-droite) -->
+<!-- Slider taille villes -->
 <div id="sizeControl">
   Taille villes :
   <input type="range" id="citySize" min="0" max="100" value="0">
@@ -116,32 +117,18 @@ canvas{border:2px solid #444}
 
 <script src="mapData.js"></script>
 <script>
-/* ─── Constantes carte ─── */
+/* ─── Constantes et données ─── */
 const VIEW=6,CELL=100,SIZE=800,SCALE=SIZE/(VIEW*CELL);
 const BX=2,BY=2,X_MIN=BX*CELL,Y_MIN=BY*CELL,X_MAX=X_MIN+VIEW*CELL,Y_MAX=Y_MIN+VIEW*CELL;
-
-/* Groupes fixes */
-const GROUPS={
-  molky:{ids:[186,368],color:'#ff0000'},
-  allies:{ids:[335,19,239],color:'#00CCFF'},
-  cafe:{ids:[3,350],color:'#ff8c00'}
-};
-
-/* Couleur temples */
-const COLOR_BY_TYPE={
-  'OFF T':'yellow','OFF NAV':'red','PROD T':'green','PROD NAV':'blue',
-  '3% OFF':'violet','Portail':'white','DEF':'black'
-};
-
-/* États */
+const GROUPS={molky:{ids:[186,368],color:'#ff0000'},
+              allies:{ids:[335,19,239],color:'#00CCFF'},
+              cafe:{ids:[3,350],color:'#ff8c00'}};
+const COLOR_BY_TYPE={'OFF T':'yellow','OFF NAV':'red','PROD T':'green','PROD NAV':'blue',
+                     '3% OFF':'violet','Portail':'white','DEF':'black'};
 const palette=['#00ffff','#ff7f00','#00ff00','#ff00ff','#ffff00','#00bfff',
                '#ff1493','#7fff00','#ff4500','#20b2aa'];
-let palIdx=0;
+let palIdx=0,cityRadius=2,minR=2,maxR=8;
 const visA={},colA={},visP={},colP={};
-
-/* Rayon villes (slider) */
-const minR=2,maxR=8;
-let cityRadius=minR;
 
 /* DOM refs */
 const mapWrapper=document.getElementById('mapWrapper');
@@ -161,7 +148,7 @@ const chkFocus=document.getElementById('chkFocus');
 const citySize=document.getElementById('citySize');
 const cityVal=document.getElementById('cityVal');
 
-/* Slider comportement */
+/* Slider taille villes */
 citySize.oninput=()=>{
   const pct=citySize.value/100;
   cityRadius=minR+(maxR-minR)*pct;
@@ -248,7 +235,7 @@ function showTip(txt,x,y){
 }
 const hideTip=()=>tooltip.style.display='none';
 
-/* Offsets dispersion mini-points */
+/* Offsets points */
 const OFF=[[0,0],[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,1],[1,-1],[-1,-1],
            [2,0],[-2,0],[0,2],[0,-2],[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[-1,2],[1,-2]];
 const toPx=(c,o)=>(c-o)*SCALE;
@@ -271,7 +258,7 @@ function drawTemples(){
     const isFocus = t.focus===true || String(t.focus).toLowerCase()==='true';
     if(onlyFocus && !isFocus) return;
 
-    const status = (showContest && t.contest && t.contest!=='none') ? t.contest : 'none';
+    const status=(showContest&&t.contest&&t.contest!=='none')?t.contest:'none';
 
     const box=document.createElement('div');
     box.className=`templeIcon ${status}`.trim();
@@ -345,7 +332,7 @@ function draw(){
   drawTemples();
 }
 
-/* premier rendu */
+/* Premier rendu */
 draw();
 </script>
 </body>
