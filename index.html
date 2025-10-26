@@ -73,11 +73,12 @@ canvas{border:2px solid #444}
 }
 
 .templeIcon.owned::before{
-  inset:-7px;                       /* diamètre extérieur +14 px */
-  border:2px solid #00e676;         /* cercle vert fin */
+  inset:-7px;                       /* diamètre +14 px */
+  border:2px solid #00e676;         /* trait vert */
   border-radius:50%;
   box-sizing:border-box;
-  transform:translate(-2px,-1px);   /* même léger décalage */
+  transform:translate(-2px,-1px);   /* petit décalage */
+  opacity:1;                        /* ← plein contraste */
   pointer-events:none;
   z-index:1;                        /* sous le cadre blanc */
 }
