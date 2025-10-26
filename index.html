@@ -51,8 +51,11 @@ canvas{border:2px solid #444}
   display:none;white-space:pre-line}
 
 /* ───────── Temples ───────── */
-.templeIcon{position:absolute;left:0;top:0;width:24px;height:24px;
-            transform:translate(-12px,-12px);pointer-events:auto}
+.templeIcon{
+  position:absolute;left:0;top:0;width:24px;height:24px;
+  transform:translate(-12px,-12px);       /* centrage standard */
+  pointer-events:auto;
+}
 .templeIcon::before{content:"";position:absolute;inset:0;border-radius:50%;
   transform:translate(-2px,-1px) scale(1.25);opacity:.2;z-index:0;background:transparent}
 .templeIcon.secured::before{background:#00c853}
@@ -67,15 +70,17 @@ canvas{border:2px solid #444}
   inset:0;
   border:2px solid #fff;
   box-sizing:border-box;
-  transform:translate(-2px,-1px);
+  transform:translate(-2px,-1px); /* même offset que l’aura */
   pointer-events:none;
   z-index:2;          /* au-dessus du vert */
 }
 
+/* anneau vert – temple conquis */
 .templeIcon.owned{
-  border-radius:50%;            /* assure la forme ronde */
-  box-shadow:0 0 0 4px #00e676; /* 4 px d’anneau, extérieur et circulaire */
-  transform:translate(-14px,-13px);
+  border-radius:50%;
+  /* x-offset  y-offset  blur  spread  color */
+  box-shadow:-2px      -1px     0     3px   #00e676;
+  /* offset (–2, –1) = même décalage que l’aura ; spread 3 px = diamètre 30 px */
 }
 
 /* sprite */
@@ -292,7 +297,7 @@ function drawTemples(){
                           tooltip.style.top =`${e.clientY+12}px`;};
     box.onmouseleave=hideTip;
 
-    /* cadre vert si temple conquis et case « Nos temples » cochée */
+    /* anneau vert si temple conquis et case « Nos temples » cochée */
     const isConq = t.conquest === true || String(t.conquest).toLowerCase() === 'true';
     if (chkFocus.checked && isConq){
       box.classList.add('owned');
