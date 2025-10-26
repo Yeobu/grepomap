@@ -102,7 +102,7 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: true,
-    conquest: true
+    conquest: false
   },
   {
     id: 9,
