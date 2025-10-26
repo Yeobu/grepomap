@@ -72,15 +72,9 @@ canvas{border:2px solid #444}
   z-index:2;          /* au-dessus du vert */
 }
 
-.templeIcon.owned::before{
-  inset:-7px;                       /* diamètre +14 px */
-  border:2px solid #00e676;         /* trait vert */
-  border-radius:50%;
-  box-sizing:border-box;
-  transform:translate(-2px,-1px);   /* petit décalage */
-  opacity:1;                        /* ← plein contraste */
-  pointer-events:none;
-  z-index:1;                        /* sous le cadre blanc */
+.templeIcon.owned{
+  border-radius:50%;            /* assure la forme ronde */
+  box-shadow:0 0 0 4px #00e676; /* 4 px d’anneau, extérieur et circulaire */
 }
 
 /* sprite */
