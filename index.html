@@ -59,20 +59,23 @@ canvas{border:2px solid #444}
 .templeIcon.tocomplete::before{background:#ffeb3b}
 .templeIcon.contested::before{background:#ff1744}
 .templeIcon.none::before{display:none}
+
+/* cadre blanc – recherche */
 .templeIcon.match::after{
-  content:"";position:absolute;inset:0;border:2px solid #fff;
-  box-sizing:border-box;transform:translate(-2px,-1px);pointer-events:none}
-
-
-.templeIcon.owned::after{
-  content:'';
+  content:"";
   position:absolute;
-  inset:-8px;              /* ↔ +8 px de marge => cadre plus grand */
-  border:1px solid #00e676;/* épaisseur réduite */
-  transform:translateX(-2px); /* décale de 2 px vers la gauche */
+  inset:0;
+  border:2px solid #fff;
   box-sizing:border-box;
+  transform:translate(-2px,-1px);
   pointer-events:none;
-  z-index:1;               /* reste derrière le cadre blanc (.match) */
+  z-index:2;          /* au-dessus du vert */
+}
+
+/* cadre vert – nos temples conquis */
+.templeIcon.owned{
+  outline:1px solid #00e676; /* trait fin */
+  outline-offset:6px;        /* agrandi vers l’extérieur */
 }
 
 /* sprite */
@@ -158,7 +161,7 @@ const tooltip=document.getElementById('tooltip');
 const chkMolky=document.getElementById('chkMolky');
 const chkAllies=document.getElementById('chkAllies');
 const chkCafe=document.getElementById('chkCafe');
-const chkContest=document.getElementById('chkContest'); // ← reste présent mais masqué
+const chkContest=document.getElementById('chkContest');
 const chkColor=document.getElementById('chkColor');
 const chkFocus=document.getElementById('chkFocus');
 const citySize=document.getElementById('citySize');
@@ -265,7 +268,7 @@ function dot(t){
 /* Temples */
 function drawTemples(){
   mapWrapper.querySelectorAll('.templeIcon').forEach(e=>e.remove());
-  const showContest=chkContest.checked;   // ← aura toujours une valeur (checkbox masquée)
+  const showContest=chkContest.checked;
   const showColor  =chkColor.checked;
   const onlyFocus  =chkFocus.checked;
 
@@ -289,10 +292,11 @@ function drawTemples(){
                           tooltip.style.top =`${e.clientY+12}px`;};
     box.onmouseleave=hideTip;
 
+    /* cadre vert si temple conquis et case « Nos temples » cochée */
     const isConq = t.conquest === true || String(t.conquest).toLowerCase() === 'true';
-if (chkFocus.checked && isConq) {
-  box.classList.add('owned');      // encadré vert
-}
+    if (chkFocus.checked && isConq){
+      box.classList.add('owned');
+    }
 
     const sp=document.createElement('div');
     sp.className=`sprite ${t.size||'small'}`;
@@ -324,6 +328,7 @@ function draw(){
       if(t.x>=X_MIN&&t.x<X_MAX&&t.y>=Y_MIN&&t.y<Y_MAX) dot(t);
     });
   });
+
   /* Villes joueurs */
   mapData.players.forEach(p=>{
     if(!visP[p.id])return;
