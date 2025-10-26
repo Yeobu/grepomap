@@ -63,18 +63,16 @@ canvas{border:2px solid #444}
   content:"";position:absolute;inset:0;border:2px solid #fff;
   box-sizing:border-box;transform:translate(-2px,-1px);pointer-events:none}
 
-  .templeIcon.owned{
-  box-shadow:-2px 0 0 3px #00e676;   /* vert franc */
-}
 
 .templeIcon.owned::after{
-  content: '';
-  position: absolute;
-  inset: -3px;                 /* 3 px de marge = épaisseur du cadre */
-  border: 3px solid #00e676;   /* vert franc */
-  transform: translateX(-2px); /* décale le cadre de 2 px vers la gauche */
-  pointer-events: none;        /* ne gêne pas les événements souris */
-  box-sizing: border-box;
+  content:'';
+  position:absolute;
+  inset:-8px;              /* ↔ +8 px de marge => cadre plus grand */
+  border:1px solid #00e676;/* épaisseur réduite */
+  transform:translateX(-2px); /* décale de 2 px vers la gauche */
+  box-sizing:border-box;
+  pointer-events:none;
+  z-index:1;               /* reste derrière le cadre blanc (.match) */
 }
 
 /* sprite */
