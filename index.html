@@ -72,11 +72,14 @@ canvas{border:2px solid #444}
   z-index:2;          /* au-dessus du vert */
 }
 
-/* cadre vert – nos temples conquis */
-.templeIcon.owned{
-  outline:2px solid #00e676; /* trait fin */
-  outline-offset:3px;        /* agrandi vers l’extérieur */
-  transform:translate(-2px,-1px);
+.templeIcon.owned::before{
+  inset:-7px;                       /* diamètre extérieur +14 px */
+  border:2px solid #00e676;         /* cercle vert fin */
+  border-radius:50%;
+  box-sizing:border-box;
+  transform:translate(-2px,-1px);   /* même léger décalage */
+  pointer-events:none;
+  z-index:1;                        /* sous le cadre blanc */
 }
 
 /* sprite */
