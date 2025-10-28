@@ -102,7 +102,7 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: true,
-    conquest: false
+    conquest: true
   },
   {
     id: 9,
@@ -362,7 +362,7 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: true,
-    conquest: false
+    conquest: true
   },
   {
     id: 29,
@@ -466,7 +466,7 @@ const staticTemples = [
     owner: 0,
     contest: 'none',
     focus: true,
-    conquest: false
+    conquest: true
   },
   {
     id: 37,
