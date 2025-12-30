@@ -299,10 +299,10 @@ function drawTemples(){
     box.onmouseleave=hideTip;
 
     /* anneau vert si temple conquis et case « Nos temples » cochée */
-    const isConq = t.conquest === true || String(t.conquest).toLowerCase() === 'true';
+    /*const isConq = t.conquest === true || String(t.conquest).toLowerCase() === 'true';
     if (chkFocus.checked && isConq){
       box.classList.add('owned');
-    }
+    }*/
 
     const sp=document.createElement('div');
     sp.className=`sprite ${t.size||'small'}`;
