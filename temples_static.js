@@ -1949,7 +1949,20 @@ const staticTemples = [
     contest: 'none',
     focus: false,
     conquest: false
-  }
+  },
+  {
+    id: 151,
+    x: 431,
+    y: 670,
+    name: 'ZEUS',
+    type: 'GT ZEUS',
+    bonus: 'GT ZEUS',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
 ];
 
 module.exports = { staticTemples };
