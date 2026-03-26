@@ -1,4 +1,4 @@
-// généré le 2026-03-26T09:49:14.993Z
+// généré le 2026-03-26T09:56:11.397Z
 const mapData = {
   "alliances": [
     {
