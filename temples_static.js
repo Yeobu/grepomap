@@ -1965,7 +1965,7 @@ const staticTemples = [
   },
   {
     id: 152,
-    x: 431,
+    x: 334,
     y: 435,
     name: 'POSEIDON',
     type: 'GT POSEIDON',
@@ -2031,10 +2031,23 @@ const staticTemples = [
   {
     id: 157,
     x: 575,
-    y: 660,
+    y: 670,
     name: 'APHRODITE',
     type: 'GT APHRODITE',
     bonus: 'GT APHRODITE',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
+  {
+    id: 158,
+    x: 669,
+    y: 558,
+    name: 'ARES',
+    type: 'GT ARES',
+    bonus: 'GT ARES',
     size: 'big',
     owner: 0,
     contest: 'none',
