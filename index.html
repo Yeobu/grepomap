@@ -292,13 +292,13 @@ function drawTemples(){
 
   mapData.temples.forEach(t=>{
     if(t.x<X_MIN||t.x>=X_MAX||t.y<Y_MIN||t.y>=Y_MAX) return;
+    const size=String(t.size||'small').toLowerCase();
     const isFocus = t.focus===true || String(t.focus).toLowerCase()==='true';
-    if(onlyFocus && !isFocus) return;
+    if(onlyFocus && !isFocus && size!=='big') return;
 
     const status=(showContest&&t.contest&&t.contest!=='none')?t.contest:'none';
-    const size=String(t.size||'small').toLowerCase();
     const spriteSize = size==='big'
-      ? 'large'
+      ? 'small'
       : (size==='small' || size==='large' || size==='olympus' ? size : 'small');
 
     const box=document.createElement('div');

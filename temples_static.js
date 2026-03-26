@@ -1963,6 +1963,84 @@ const staticTemples = [
     focus: false,
     conquest: false
   },
+  {
+    id: 152,
+    x: 431,
+    y: 435,
+    name: 'POSEIDON',
+    type: 'GT POSEIDON',
+    bonus: 'GT POSEIDON',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
+  {
+    id: 153,
+    x: 415,
+    y: 330,
+    name: 'HERA',
+    type: 'GT HERA',
+    bonus: 'GT HERA',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
+  {
+    id: 154,
+    x: 333,
+    y: 577,
+    name: 'ATHENA',
+    type: 'GT ATHENA',
+    bonus: 'GT ATHENA',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
+  {
+    id: 155,
+    x: 562,
+    y: 325,
+    name: 'HADES',
+    type: 'GT HADES',
+    bonus: 'GT HADES',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
+  {
+    id: 156,
+    x: 666,
+    y: 421,
+    name: 'ARTEMIS',
+    type: 'GT ARTEMIS',
+    bonus: 'GT ARTEMIS',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  },
+  {
+    id: 157,
+    x: 575,
+    y: 660,
+    name: 'APHRODITE',
+    type: 'GT APHRODITE',
+    bonus: 'GT APHRODITE',
+    size: 'big',
+    owner: 0,
+    contest: 'none',
+    focus: false,
+    conquest: false
+  }
 ];
 
 module.exports = { staticTemples };
