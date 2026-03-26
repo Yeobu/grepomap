@@ -2043,7 +2043,7 @@ const staticTemples = [
   },
   {
     id: 158,
-    x: 669,
+    x: 679,
     y: 558,
     name: 'ARES',
     type: 'GT ARES',
